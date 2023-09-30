@@ -25,7 +25,7 @@ if(isset($_SESSION['opcao'])){
     <title>Opções</title>
 </head>
 <body>
-    <h1>Olá, <?php echo $nome; ?>!</h1>
+    <h1>Olá, <?php echo ucfirst(strtolower($nome)); ?>!</h1>
     <p>Informe o que deseja fazer:</p>
     <ul>
         <li><a href="calculate.php?option=ferias">Calcular suas férias</a></li>
