@@ -9,7 +9,6 @@ if(isset($_COOKIE['nome'])){
 
 if(isset($_SESSION['opcao'])){
     $opcao = $_SESSION['opcao'];
-    $_SESSION[$opcao]++;
 } else {
     $_SESSION['opcao'] = "";
     $_SESSION['ferias'] = 0;
