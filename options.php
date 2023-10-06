@@ -11,9 +11,9 @@ if(isset($_SESSION['opcao'])){
     $opcao = $_SESSION['opcao'];
 } else {
     $_SESSION['opcao'] = "";
-    $_SESSION['ferias'] = 0;
-    $_SESSION['ir'] = 0;
-    $_SESSION['aumento'] = 0;
+    $_SESSION['ferias'] = null;
+    $_SESSION['ir'] = null;
+    $_SESSION['aumento'] = null;
 }
 
 ?>
@@ -35,7 +35,6 @@ if(isset($_SESSION['opcao'])){
     <p>2 – Valor das férias: <?php echo isset($_SESSION['ferias']) ? $_SESSION['ferias'] : "Não calculado"; ?></p>
     <p>3 – Valor do IR: <?php echo isset($_SESSION['ir']) ? $_SESSION['ir'] : "Não calculado"; ?></p>
     <p>4 – Valor do aumento salarial: <?php echo isset($_SESSION['aumento']) ? $_SESSION['aumento'] : "Não calculado"; ?></p>
-    <p><a href="#">Link para voltar à página de opções para continuar calculando</a></p>
-    <p><a href="sair.php">Link para sair</a></p>
+    <p><a href="sair.php">Sair</a></p>
 </body>
 </html>
