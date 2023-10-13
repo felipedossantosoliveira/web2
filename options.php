@@ -1,13 +1,14 @@
 <?php
+
 session_start();
 
-if(isset($_COOKIE['nome'])){
+if(isset($_COOKIE['nome'])) {
     $nome = $_COOKIE['nome'];
 } else {
     $nome = "Nome não encontrado";
 }
 
-if(isset($_SESSION['opcao'])){
+if(isset($_SESSION['opcao'])) {
     $opcao = $_SESSION['opcao'];
 } else {
     $_SESSION['opcao'] = "";
