@@ -7,13 +7,17 @@ if(isset($_GET['option'])) {
 
     switch($opcao) {
         case 'ferias':
-            $_SESSION['ferias'] = $_SESSION['salario'] * 0.33; 
+            $_SESSION['ferias'] = $_SESSION['salario'] * 0.33;
+            $_SESSION['count_ferias'] = isset($_SESSION['count_ferias']) ? $_SESSION['count_ferias'] + 1 : 1;
             break;
         case 'ir':
             $_SESSION['ir'] = ir($_SESSION['salario']);
+            $_SESSION['count_ir'] = isset($_SESSION['count_ir']) ? $_SESSION['count_ir'] + 1 : 1;
             break;
         case 'aumento':
             $_SESSION['aumento'] = $_SESSION['salario'] * 0.1;
+            $_SESSION['salario'] += $_SESSION['salario'] * 0.1;
+            $_SESSION['count_aumento'] = isset($_SESSION['count_aumento']) ? $_SESSION['count_aumento'] + 1 : 1;
             break;
         default:
             break;
