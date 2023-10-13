@@ -22,20 +22,25 @@ if(isset($_SESSION['opcao'])) {
 <!DOCTYPE html>
 <html>
 <head>
+    <link rel="stylesheet" href="./css/output.css">
     <title>Opções</title>
 </head>
 <body>
-    <h1>Olá, <?php echo ucfirst(strtolower($nome)); ?>!</h1>
-    <p>Informe o que deseja fazer:</p>
-    <ul>
-        <li><a href="calculate.php?option=ferias">Calcular suas férias</a></li>
-        <li><a href="calculate.php?option=ir">Calcular seu imposto de renda, de acordo com a faixa salarial</a></li>
-        <li><a href="calculate.php?option=aumento">Calcular o aumento de salário em 10%</a></li>
-    </ul>
-    <p>1 – Valor do salário: <?php echo isset($_SESSION['salario']) ? $_SESSION['salario'] : "Não informado"; ?></p>
-    <p>2 – Valor das férias: <?php echo isset($_SESSION['ferias']) ? $_SESSION['ferias'] : "Não calculado"; ?></p>
-    <p>3 – Valor do IR: <?php echo isset($_SESSION['ir']) ? $_SESSION['ir'] : "Não calculado"; ?></p>
-    <p>4 – Valor do aumento salarial: <?php echo isset($_SESSION['aumento']) ? $_SESSION['aumento'] : "Não calculado"; ?></p>
-    <p><a href="sair.php">Sair</a></p>
+    <section class="flex flex-col items-center justify-center space-y-4 w-screen h-screen">
+    <div class="space-y-4 class p-10 rounded-md border bg-slate-50 drop-shadow">
+            <h1 class="text-md font-semibold" >Olá, <?php echo ucfirst(strtolower($nome)); ?>!</h1>
+            <p class="text-sm">Informe o que deseja fazer:</p>
+            <ul class="flex flex-col w-full space-y-2">
+                <li class="w-full flex"><a class="px-2 py-1 bg-sky-600 text-white rounded-md w-full" href="calculate.php?option=ferias">Calcular suas férias</a></li>
+                <li class="w-full flex"><a class="px-2 py-1 bg-sky-600 text-white rounded-md w-full" href="calculate.php?option=ir">Calcular seu imposto de renda</a></li>
+                <li class="w-full flex"><a class="px-2 py-1 bg-sky-600 text-white rounded-md w-full" href="calculate.php?option=aumento">Calcular o aumento de salário em 10%</a></li>
+            </ul>
+            <p class="text-sm">Valor do salário: <span class="text-base font-semibold">R$ <?php echo isset($_SESSION['salario']) ? number_format($_SESSION['salario'],2,",",".") : "Não informado"; ?></span></p>
+            <p class="text-sm">Valor das férias: <span class="text-base font-semibold">R$ <?php echo isset($_SESSION['ferias']) ? number_format($_SESSION['ferias'],2,",",".") : "Não calculado"; ?></span></p>
+            <p class="text-sm">Valor do IR: <span class="text-base font-semibold">R$ <?php echo isset($_SESSION['ir']) ? number_format($_SESSION['ir'],2,",",".") : "Não calculado"; ?></span></p>
+            <p class="text-sm">Valor do aumento salarial: <span class="text-base font-semibold">R$ <?php echo isset($_SESSION['aumento']) ? number_format($_SESSION['aumento'],2,",",".") : "Não calculado"; ?></span></p>
+            <p class="w-full flex"><a class="px-2 py-1 bg-red-500 text-white rounded-md w-full" href="sair.php">Sair</a></p>
+        </div>
+    </section>
 </body>
 </html>
