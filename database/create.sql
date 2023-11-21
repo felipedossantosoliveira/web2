@@ -8,7 +8,7 @@ DROP TABLE IF EXISTS employees;
 CREATE TABLE companies(
     id BIGINT  NOT NULL AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
-    cnpj VARCHAR(255) NOT NULL
+    cnpj VARCHAR(14) NOT NULL
 );
 
 CREATE TABLE departaments(
@@ -21,7 +21,7 @@ CREATE TABLE departaments(
 CREATE TABLE employees(
     id BIGINT  NOT NULL AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
-    cpf VARCHAR(255) NOT NULL,
+    cpf VARCHAR(11) NOT NULL,
     salary DECIMAL(10,2) NOT NULL,
     departament_id BIGINT  NOT NULL,
     FOREIGN KEY (departament_id) REFERENCES departaments(id)

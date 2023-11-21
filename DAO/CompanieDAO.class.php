@@ -9,14 +9,10 @@ class CompanieDAO{
         $cnpj = $companie->getCnpj();
 
         $sql = $con->prepare("INSERT INTO companie (name, cnpj) VALUES (?, ?)") or die ($con->error);
-        $sql->bind_param("sdiss", $name, $cnpj);
+        $sql->bind_param("ss", $name, $cnpj);
         $sql->execute();
 
-        if($sql->affected_rows > 0){
-            return true;
-        }else{
-            return false;
-        }
+        return $sql->affected_rows > 0;
     }
     public function update(Companie $companie)
     {
