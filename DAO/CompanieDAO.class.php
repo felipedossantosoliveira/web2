@@ -8,7 +8,7 @@ class CompanieDAO{
         $name = $companie->getName();
         $cnpj = $companie->getCnpj();
 
-        $sql = $con->prepare("INSERT INTO companie (name, cnpj) VALUES (?, ?)") or die ($con->error);
+        $sql = $con->prepare("INSERT INTO companies (name, cnpj) VALUES (?, ?)") or die ($con->error);
         $sql->bind_param("ss", $name, $cnpj);
         $sql->execute();
 
@@ -22,7 +22,7 @@ class CompanieDAO{
         $name = $companie->getName();
         $cnpj = $companie->getCnpj();
 
-        $sql = $con->prepare("UPDATE companie SET name = ?, cnpj = ? WHERE id = ?") or die ($con->error);
+        $sql = $con->prepare("UPDATE companies SET name = ?, cnpj = ? WHERE id = ?") or die ($con->error);
         $sql->bind_param("sdis", $name, $cnpj, $id);
         $sql->execute();
 
@@ -36,7 +36,7 @@ class CompanieDAO{
     {
         global $con;
 
-        $sql = $con->prepare("DELETE FROM companie WHERE id = ?") or die ($con->error);
+        $sql = $con->prepare("DELETE FROM companies WHERE id = ?") or die ($con->error);
         $sql->bind_param("i", $id);
         $sql->execute();
 
@@ -50,7 +50,7 @@ class CompanieDAO{
     {
         global $con;
 
-        $sql = $con->prepare("SELECT * FROM companie WHERE id = ?") or die ($con->error);
+        $sql = $con->prepare("SELECT * FROM companies WHERE id = ?") or die ($con->error);
         $sql->bind_param("i", $id);
         $sql->execute();
         $result = $sql->get_result();
@@ -66,14 +66,12 @@ class CompanieDAO{
     {
         global $con;
 
-        $sql = $con->query("SELECT * FROM companie") or die ($con->error);
-        $sql->fetch_array();
+        $sql = $con->query("SELECT * FROM companies") or die ($con->error);
 
-        if($sql->num_rows > 0){
-            $companie = $sql->fetch_all(MYSQLI_ASSOC);
-            return $companie;
-        }else{
-            return false;
+        while($row = $sql->fetch_assoc()){
+
+            $result[] = $row;
         }
+        return $result;
     }
 }
