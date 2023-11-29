@@ -3,7 +3,7 @@
 class Departament{
     private $id;
     private $name;
-    private $idCompanie;
+    private $idCompany;
     
     public function setId($id)
     {
@@ -25,13 +25,13 @@ class Departament{
         return $this->name;    
     }
     
-    public function setIdCompanie($idCompanie)
+    public function setIdCompany($idCompany)
     {
-        $this->idCompanie = $idCompanie;
+        $this->idCompany = $idCompany;
     }
     
-    public function getIdCompanie()
+    public function getIdCompany()
     {
-        return $this->idCompanie;    
+        return $this->idCompany;    
     }
 }

@@ -1,5 +1,5 @@
 <?php
-class Companie{
+class Company{
     private $id;
     private $name;
     private $cnpj;

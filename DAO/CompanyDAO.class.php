@@ -1,12 +1,12 @@
 <?php
 
-class CompanieDAO{
-    public function insert(Companie $companie)
+class CompanyDAO{
+    public function insert(Company $company)
     {
         global $con;
 
-        $name = $companie->getName();
-        $cnpj = $companie->getCnpj();
+        $name = $company->getName();
+        $cnpj = $company->getCnpj();
 
         $sql = $con->prepare("INSERT INTO companies (name, cnpj) VALUES (?, ?)") or die ($con->error);
         $sql->bind_param("ss", $name, $cnpj);
@@ -14,16 +14,17 @@ class CompanieDAO{
 
         return $sql->affected_rows > 0;
     }
-    public function update(Companie $companie)
+
+    public function update(Company $company)
     {
         global $con;
 
-        $id = $companie->getId();
-        $name = $companie->getName();
-        $cnpj = $companie->getCnpj();
+        $id = $company->getId();
+        $name = $company->getName();
+        $cnpj = $company->getCnpj();
 
         $sql = $con->prepare("UPDATE companies SET name = ?, cnpj = ? WHERE id = ?") or die ($con->error);
-        $sql->bind_param("sdis", $name, $cnpj, $id);
+        $sql->bind_param("ssi", $name, $cnpj, $id);
         $sql->execute();
 
         if($sql->affected_rows > 0){
@@ -32,6 +33,7 @@ class CompanieDAO{
             return false;
         }
     }
+
     public function delete($id)
     {
         global $con;
@@ -46,6 +48,7 @@ class CompanieDAO{
             return false;
         }
     }
+
     public function select($id)
     {
         global $con;
@@ -56,8 +59,8 @@ class CompanieDAO{
         $result = $sql->get_result();
 
         if($result->num_rows > 0){
-            $companie = $result->fetch_assoc();
-            return $companie;
+            $company = $result->fetch_assoc();
+            return $company;
         }else{
             return false;
         }
