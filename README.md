@@ -1,4 +1,4 @@
-# Calculadora de salário
+# CRUD DE EMPRESAS-DEPARTAMENTOS-FUNCIONÁRIOS
 
 ### Tarefa desenvolvida para a disciplina de WEBII
 
@@ -7,7 +7,6 @@
 npm install //baixar as dependências do node(node_modules)
 
 npx tailwindcss -i ./css/input.css -o ./css/output.css --watch
-php -S localhost:8000
 ```
 
 #### Prod:
@@ -16,5 +15,3 @@ npm install //baixar as dependências do node(node_modules)
 
 npx tailwindcss -i ./css/input.css -o ./css/output.css
 ```
-
-https://stunning-waffle-x4vv96g6wg936jgx-8000.app.github.dev/
