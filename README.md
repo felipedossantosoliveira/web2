@@ -6,12 +6,12 @@
 ```
 npm install //baixar as dependências do node(node_modules)
 
-npx tailwindcss -i ./css/input.css -o ./css/output.css --watch
+npm run dev //start css build and watch
 ```
 
 #### Prod:
 ```
 npm install //baixar as dependências do node(node_modules)
 
-npx tailwindcss -i ./css/input.css -o ./css/output.css
+npm run build //build css
 ```
