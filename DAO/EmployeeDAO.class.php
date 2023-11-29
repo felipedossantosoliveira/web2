@@ -3,40 +3,35 @@
 class EmployeeDAO{
     public function insert(Employee $employee)
     {
-        global $con;
+		global $con;
 
-		$departamentId = $employee->getIdDepartament();
 		$name = $employee->getName();
-		$salary = $employee->getSalary();
-		$cpf = $employee->getCpf();
+        $cpf = $employee->getCpf();
+        $salary = $employee->getSalary();
+		$DepartamentId = $employee->getIdDepartament();
 
-        $sql = $con->prepare("INSERT INTO employees (departament_id,name,salary,cpf) VALUES (?,?,?,?)") or die ($con->error);
-        $sql->bind_param("isis", $departamentId,$name,$salary,$cpf);
-        $sql->execute();
+		$sql = $con->prepare("INSERT INTO employees (name,cpf,salary,departament_id) VALUES (?,?,?,?)") or die ($con->error);
+		$sql->bind_param("ssdi", $name, $cpf, $salary, $DepartamentId);
+		$sql->execute();
 
-        return $sql->affected_rows > 0;
+		return $sql->affected_rows > 0;
     }
 
     public function update(Employee $employee)
-    {
+	{
 		global $con;
 
-		$id = $employee->getId();
-		$name = $employee->getName();
-		$cpf = $employee->getCpf();
-		$salary = $employee->getSalary();
-		$idDepartament = $employee->getIdDepartament();
+        $id = $employee->getId();
+        $name = $employee->getName();
+        $cpf = $employee->getCpf();
+        $salary = $employee->getSalary();
 
-		$sql = $con->prepare("UPDATE employees SET name = ?, cpf = ?, salary = ?, departament_id = ? WHERE id = ?") or die ($con->error);
-		$sql->bind_param("ssiii", $name, $cpf, $salary, $idDepartament, $id);
-		$sql->execute();
+        $sql = $con->prepare("UPDATE employees SET name = ?, cpf = ?, salary = ? WHERE id = ?") or die ($con->error);
+        $sql->bind_param("ssdi", $name, $cpf, $salary, $id);
+        $sql->execute();
 
-		if($sql->affected_rows > 0){
-			return true;
-		}else{
-			return false;
-		}
-    }
+        return $sql->affected_rows > 0;
+	}
 
     public function delete($id)
     {
@@ -46,11 +41,7 @@ class EmployeeDAO{
         $sql->bind_param("i", $id);
         $sql->execute();
 
-        if($sql->affected_rows > 0){
-            return true;
-        }else{
-            return false;
-        }
+        return $sql->affected_rows > 0;
     }
 
     public function select($id)
@@ -63,22 +54,43 @@ class EmployeeDAO{
         $result = $sql->get_result();
 
         if($result->num_rows > 0){
-            $company = $result->fetch_assoc();
-            return $company;
+            $employee = $result->fetch_assoc();
+            return $employee;
         }else{
             return false;
         }
     }
+
     public function show()
     {
         global $con;
 
-        $sql = $con->query("SELECT * FROM employees") or die ($con->error);
+        $sql = $con->prepare("SELECT * FROM employees") or die ($con->error);
+        $sql->execute();
+        $result = $sql->get_result();
 
-        while($row = $sql->fetch_assoc()){
-
-            $result[] = $row;
+        if($result->num_rows > 0){
+            $employees = $result->fetch_all(MYSQLI_ASSOC);
+            return $employees;
+        }else{
+            return false;
         }
-        return $result;
+    }
+
+    public function showByDepartament($id)
+    {
+        global $con;
+
+        $sql = $con->prepare("SELECT * FROM employees WHERE departament_id = ?") or die ($con->error);
+        $sql->bind_param("i", $id);
+        $sql->execute();
+        $result = $sql->get_result();
+
+        if($result->num_rows > 0){
+            $employees = $result->fetch_all(MYSQLI_ASSOC);
+            return $employees;
+        }else{
+            return false;
+        }
     }
 }
