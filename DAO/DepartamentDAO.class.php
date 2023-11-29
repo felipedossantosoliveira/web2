@@ -27,11 +27,7 @@ class DepartamentDAO{
 		$sql->bind_param("sii", $name, $CompanyId, $id);
 		$sql->execute();
 
-		if($sql->affected_rows > 0){
-			return true;
-		}else{
-			return false;
-		}
+		return $sql->affected_rows > 0;
 	}
 	public function delete($id)
 	{
@@ -41,11 +37,7 @@ class DepartamentDAO{
 		$sql->bind_param("i", $id);
 		$sql->execute();
 
-		if($sql->affected_rows > 0){
-			return true;
-		}else{
-			return false;
-		}
+		return $sql->affected_rows > 0;
 	}
 	public function select($id)
 	{

@@ -10,9 +10,9 @@ $companyDAO = new CompanyDAO();
 $company = $companyDAO->select($_GET['companyId']);;
 $departaments = $departamentDAO->showByCompany($company['id']);
 
-if (isset($_POST['create-name']) && isset($_POST['create-companyId'])) {
+if (isset($_POST['create-name']) && isset($company['id'])) {
     $departament->setName($_POST['create-name']);
-    $departament->setIdCompany($_POST['create-companyId']);
+    $departament->setIdCompany($company['id']);
     if($departamentDAO->insert($departament)){
         header("Location: Index.php?companyId=".$company['id']."&created=true");
     }
@@ -23,10 +23,10 @@ if (isset($_POST['delete'])) {
     header("Location: Index.php?companyId=".$company['id']."&deleted=true");
 }
 
-if (isset($_POST['update-name']) && isset($_POST['update-companyId']) && isset($_POST['update-id'])) {
+if (isset($_POST['update-name']) && isset($company['id']) && isset($_POST['update-id'])) {
     $departament->setId($_POST['update-id']);
     $departament->setName($_POST['update-name']);
-    $departament->setIdCompany($_POST['update-companyId']);
+    $departament->setIdCompany($company['id']);
     if($departamentDAO->update($departament)){
         header("Location: Index.php?companyId=".$company['id']."&edited=true");
     }
@@ -69,12 +69,22 @@ if (isset($_POST['update-name']) && isset($_POST['update-companyId']) && isset($
 </script>
 
 <body>
-    <section class="grid sm:grid-cols-3 gap-y-5">
-
-        <div class="sm:mb-0 mb-3 col-span-full">
-            <h2 class="text-3xl font-bold"><?php echo $company['name']?></h2>
+<header class="w-full py-5 px-10 bg-slate-900 text-slate-100 flex items-center justify-between mb-5">
+        <div>
+            <h2>
+                <a href=".././Departament/Index.php?companyId=<?php echo $company['id']?>" class="hover:underline text-3xl font-semibold">
+                    <?php echo $company['name']?>
+                </a>
+                <span class="text-xl"> > Departamentos</span>
+            </h2>
         </div>
-
+        <nav>
+            <a type="button" href=".././Company/Index.php" class="px-2 py-1 bg-slate-700 text-slate-50 rounded">
+                Empresas
+            </a>
+        </nav>
+    </header>
+    <section class="grid sm:grid-cols-3 gap-y-5">
         <div class="sm:mb-0 mb-3">
             <h2 class="text-2xl font-bold">Departamentos</h2>
             <p id="title" class="text-sm">Criação de departamento</p>
@@ -86,7 +96,6 @@ if (isset($_POST['update-name']) && isset($_POST['update-companyId']) && isset($
                     <label class="block" for="create-name">Nome</label>
                     <input id="create-name" autocomplete="off" name="create-name" class="px-3 py-2 rounded border w-full" type="text" placeholder="Nome da departamento">
                 </div>
-                <input id="create-companyId" name="create-companyId" type="hidden" value="<?php echo $company['id']; ?>">
                 <div class="mt-2 flex justify-end">
                     <input type="submit" id="submit" value="Criar departamento" class="px-2 py-1 bg-green-700 text-slate-50 rounded"/>
                 </div>
@@ -100,7 +109,6 @@ if (isset($_POST['update-name']) && isset($_POST['update-companyId']) && isset($
                     <label class="block" for="update-name">Nome</label>
                     <input id="update-name" autocomplete="off" name="update-name" class="px-3 py-2 rounded border w-full" type="text" placeholder="Nome da departamento">
                 </div>
-                    <input id="update-companyId" name="update-companyId" type="hidden" value="<?php echo $company['id']; ?>">
                 <div class="mt-2 flex justify-end">
                     <input type="submit" id="submit" value="Editar departamento" class="px-2 py-1 bg-green-700 text-slate-50 rounded"/>
                 </div>
@@ -123,7 +131,9 @@ if (isset($_POST['update-name']) && isset($_POST['update-companyId']) && isset($
                     </tr>
                 </thead>
                 <tbody>
-                    <?php foreach ($departaments as $key => $departament) { ?>
+                    <?php 
+                    if ($departaments)
+                    foreach ($departaments as $key => $departament) { ?>
                         <tr class="border-b text-sm">
                             <td class="py-2 min-w-[70px]"><?php echo $departament['id']; ?></td>
                             <td class="py-2 w-max-[300px] min-w-[150px] truncate"><?php echo $departament['name']; ?></td>
@@ -137,6 +147,9 @@ if (isset($_POST['update-name']) && isset($_POST['update-companyId']) && isset($
                                     class="px-2 py-1 bg-yellow-700 text-slate-50 rounded">
                                     Editar
                                 </button>
+                                <a type="button" href=".././Employee/Index.php?departamentId=<?php echo $departament['id']; ?>" class="px-2 py-1 bg-green-700 text-slate-50 rounded">
+                                    Funcionários
+                                </a>
                             </td>
                         </tr>
                     <?php } ?>
