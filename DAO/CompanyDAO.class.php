@@ -69,12 +69,15 @@ class CompanyDAO{
     {
         global $con;
 
-        $sql = $con->query("SELECT * FROM companies") or die ($con->error);
+        $sql = $con->prepare("SELECT * FROM companies") or die ($con->error);
+		$sql->execute();
+		$result = $sql->get_result();
 
-        while($row = $sql->fetch_assoc()){
-
-            $result[] = $row;
-        }
-        return $result;
+		if($result->num_rows > 0){
+			$departaments = $result->fetch_all(MYSQLI_ASSOC);
+			return $departaments;
+		}else{
+			return false;
+		}
     }
 }
