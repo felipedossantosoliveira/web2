@@ -145,7 +145,7 @@ function select($id)
                             <td class="py-2">
                                 <form action="?Index" method="POST" class="inline-block">
                                     <input type="hidden" name="delete" value="<?php echo $company['id']; ?>">
-                                    <input type="submit" value="Excluir" class="px-2 py-1 bg-red-700 text-slate-50 rounded" />
+                                    <input type="submit" value="Excluir" class="cursor-pointer px-2 py-1 bg-red-700 text-slate-50 rounded" />
                                 </form>
                                 <button onclick="update(<?php echo $company['id']; ?>, '<?php echo $company['name']; ?>', '<?php echo $company['cnpj']; ?>')" class="px-2 py-1 bg-yellow-700 text-slate-50 rounded">
                                     Editar

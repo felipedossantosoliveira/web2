@@ -170,7 +170,7 @@ if (isset($_POST['update-name']) && isset($departament['id']) && isset($_POST['u
                             <td class="py-2">
                                 <form action="Index.php?departamentId=<?php echo $departament['id'];?>" method="POST" class="inline-block">
                                     <input type="hidden" name="delete" value="<?php echo $employee['id']; ?>">
-                                    <input type="submit" value="Excluir" class="px-2 py-1 bg-red-700 text-slate-50 rounded"/>
+                                    <input type="submit" value="Excluir" class="cursor-pointer px-2 py-1 bg-red-700 text-slate-50 rounded"/>
                                 </form>
                                 <button 
                                     onclick="update(<?php echo $employee['id']; ?>, '<?php echo $employee['name']; ?>', '<?php echo $employee['cpf']; ?>', '<?php echo $employee['salary']; ?>')" 
